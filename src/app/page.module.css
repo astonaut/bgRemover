@@ -1,53 +1,89 @@
 .page {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 24px 0 72px;
+  padding: var(--space-lg) 0 72px;
 }
 
+/* ── Topbar ── */
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  padding: 12px 0 28px;
+  gap: var(--space-lg);
+  padding: 12px 0 var(--space-lg);
+  animation: fadeIn 0.6s var(--ease-out-expo);
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-display), sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.logoIcon {
+  flex-shrink: 0;
 }
 
 .nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: var(--space-md);
   color: var(--muted);
+  font-size: 0.95rem;
 }
 
+.nav a {
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: width var(--transition-base);
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* ── Hero ── */
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(320px, 520px);
-  gap: 28px;
+  gap: var(--space-lg);
   align-items: start;
 }
 
 .heroCopy {
-  padding: 20px 0 8px;
+  padding: var(--space-md) 0 var(--space-xs);
+  animation: fadeInUp 0.7s var(--ease-out-expo) 0.1s both;
 }
 
 .kicker,
 .sectionLabel {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 999px;
+  gap: var(--space-xs);
+  padding: var(--space-xs) 14px;
+  border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.55);
   border: 1px solid rgba(33, 27, 22, 0.08);
-  color: var(--secondary);
+  color: var(--accent-strong);
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -61,18 +97,23 @@
 }
 
 .heroCopy h1 {
-  max-width: 12ch;
+  max-width: 14ch;
   margin-top: 18px;
-  font-size: clamp(3rem, 8vw, 6rem);
-  line-height: 0.92;
-  letter-spacing: -0.05em;
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.accentHighlight {
+  color: var(--accent);
+  position: relative;
 }
 
 .lead {
-  max-width: 62ch;
-  margin-top: 20px;
+  max-width: 52ch;
+  margin-top: var(--space-md);
   color: var(--muted);
-  font-size: 1.08rem;
+  font-size: 1.12rem;
   line-height: 1.7;
 }
 
@@ -85,18 +126,24 @@
 
 .heroMeta span {
   padding: 10px 14px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   border: 1px solid rgba(33, 27, 22, 0.1);
   background: rgba(255, 255, 255, 0.58);
-  font-size: 0.94rem;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-.featureSection,
-.workflowSection,
-.faqSection {
-  margin-top: 84px;
+/* ── Example / Before-After Section ── */
+.exampleSection {
+  margin-top: var(--space-3xl);
 }
 
+.sliderWrap {
+  margin-top: var(--space-lg);
+  max-width: 800px;
+}
+
+/* ── Section Headings ── */
 .sectionHeading {
   max-width: 720px;
 }
@@ -108,95 +155,214 @@
   letter-spacing: -0.04em;
 }
 
-.featureGrid,
-.workflowGrid,
-.faqList {
-  display: grid;
-  gap: 18px;
-  margin-top: 28px;
+/* ── Features ── */
+.featureSection {
+  margin-top: var(--space-3xl);
 }
 
 .featureGrid {
+  display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
 }
 
-.workflowGrid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.faqList {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.featureCard,
-.stepCard,
-.faqCard {
+.featureCard {
   min-height: 100%;
-  padding: 24px;
+  padding: var(--space-lg);
   border: 1px solid var(--border);
-  border-radius: 28px;
+  border-radius: var(--radius-lg);
   background: var(--surface);
   backdrop-filter: blur(16px);
   box-shadow: var(--shadow);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-.featureCard h3,
-.faqCard h3 {
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 64px rgba(72, 45, 23, 0.16);
+}
+
+.featureIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  font-size: 1.4rem;
+  margin-bottom: var(--space-sm);
+}
+
+.featureCard h3 {
   font-family: var(--font-display), sans-serif;
   font-size: 1.3rem;
   line-height: 1.1;
 }
 
-.featureCard p,
-.stepCard p,
-.faqCard p {
+.featureCard p {
   margin-top: 14px;
   color: var(--muted);
   line-height: 1.65;
 }
 
+/* ── Workflow Timeline ── */
+.workflowSection {
+  margin-top: var(--space-3xl);
+}
+
+.workflowTimeline {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
 .stepCard {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1;
+  min-width: 0;
 }
 
 .stepNumber {
   display: inline-flex;
-  width: fit-content;
-  padding: 10px 12px;
-  border-radius: 16px;
-  background: var(--accent-soft);
-  color: var(--accent-strong);
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
   font-family: var(--font-display), sans-serif;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
+.stepContent h3 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.stepContent p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.stepConnector {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 0;
+}
+
+/* ── FAQ Accordion ── */
+.faqSection {
+  margin-top: var(--space-3xl);
+}
+
+.faqList {
+  max-width: 720px;
+  margin-top: var(--space-lg);
+}
+
+.faqItem {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: box-shadow var(--transition-base);
+}
+
+.faqItem[open] {
+  box-shadow: var(--shadow);
+}
+
+.faqQuestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: color var(--transition-fast);
+}
+
+.faqQuestion::-webkit-details-marker {
+  display: none;
+}
+
+.faqQuestion:hover {
+  color: var(--accent);
+}
+
+.faqChevron {
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.faqItem[open] .faqChevron {
+  transform: rotate(180deg);
+}
+
+.faqAnswer {
+  padding: 0 var(--space-lg) var(--space-md);
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── Footer ── */
 .footer {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
-  margin-top: 84px;
-  padding-top: 20px;
+  gap: var(--space-sm);
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-md);
   border-top: 1px solid rgba(33, 27, 22, 0.08);
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
+/* ── Responsive ── */
 @media (max-width: 1024px) {
   .hero {
     grid-template-columns: 1fr;
   }
 
-  .featureGrid,
-  .workflowGrid,
-  .faqList {
-    grid-template-columns: 1fr;
-  }
-
   .heroCopy h1 {
     max-width: 10ch;
+  }
+
+  .workflowTimeline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .stepConnector {
+    display: none;
+  }
+
+  .stepCard {
+    padding: var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
   }
 
   .footer {
@@ -213,12 +379,11 @@
   .topbar {
     align-items: flex-start;
     flex-direction: column;
-    padding-bottom: 20px;
+    padding-bottom: var(--space-md);
   }
 
   .nav {
     gap: 14px;
-    font-size: 0.95rem;
   }
 
   .heroCopy {
@@ -226,7 +391,7 @@
   }
 
   .heroCopy h1 {
-    font-size: clamp(2.7rem, 18vw, 4.5rem);
+    font-size: clamp(2.4rem, 10vw, 3.6rem);
   }
 
   .lead {
@@ -237,6 +402,6 @@
   .workflowSection,
   .faqSection,
   .footer {
-    margin-top: 64px;
+    margin-top: var(--space-2xl);
   }
 }

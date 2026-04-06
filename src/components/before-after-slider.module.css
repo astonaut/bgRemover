@@ -1,0 +1,94 @@
+.slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: ew-resize;
+  user-select: none;
+  touch-action: none;
+  box-shadow: 0 8px 32px rgba(33, 27, 22, 0.12);
+  border: 1px solid rgba(33, 27, 22, 0.08);
+}
+
+.slider:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.imageLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 3px;
+  z-index: 2;
+}
+
+.handleLine {
+  flex: 1;
+  width: 3px;
+  background: white;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.handleCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  color: var(--foreground);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.labelBefore,
+.labelAfter {
+  position: absolute;
+  bottom: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 3;
+  backdrop-filter: blur(8px);
+}
+
+.labelBefore {
+  left: 14px;
+  background: rgba(33, 27, 22, 0.65);
+  color: #fff;
+}
+
+.labelAfter {
+  right: 14px;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--foreground);
+}
+
+@media (max-width: 720px) {
+  .slider {
+    aspect-ratio: 4 / 3;
+  }
+}
